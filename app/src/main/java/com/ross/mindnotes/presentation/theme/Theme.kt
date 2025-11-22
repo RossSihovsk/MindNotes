@@ -1,4 +1,4 @@
-package com.ross.mindnotes.ui.theme
+package com.ross.mindnotes.presentation.theme
 
 import android.app.Activity
 import android.os.Build

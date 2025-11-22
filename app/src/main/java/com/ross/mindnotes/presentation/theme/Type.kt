@@ -1,4 +1,4 @@
-package com.ross.mindnotes.ui.theme
+package com.ross.mindnotes.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
