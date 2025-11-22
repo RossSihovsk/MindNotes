@@ -60,19 +60,13 @@ fun CalendarScreen(
         // Month Header
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = { viewModel.onEvent(CalendarEvent.PreviousMonth) }) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Previous Month")
-            }
             Text(
                 text = "${state.currentMonth.month.getDisplayName(TextStyle.FULL, Locale.getDefault())} ${state.currentMonth.year}",
                 style = MaterialTheme.typography.headlineSmall
             )
-            IconButton(onClick = { viewModel.onEvent(CalendarEvent.NextMonth) }) {
-                Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Next Month")
-            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))

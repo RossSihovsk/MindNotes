@@ -60,12 +60,6 @@ fun NotesScreen(
                     text = "MindNotes",
                     style = MaterialTheme.typography.headlineMedium
                 )
-                IconButton(onClick = { navController.navigate(Screen.CalendarScreen.route) }) {
-                    Icon(
-                        imageVector = Icons.Default.DateRange,
-                        contentDescription = "Calendar"
-                    )
-                }
             }
         },
         floatingActionButton = {
