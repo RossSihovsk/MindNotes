@@ -37,7 +37,7 @@ class NoteRepositoryImpl(
             timestamp = timestamp,
             category = category,
             mood = mood,
-            imageUri = imageUri
+            images = images
         )
     }
 
@@ -49,7 +49,7 @@ class NoteRepositoryImpl(
             timestamp = timestamp,
             category = category,
             mood = mood,
-            imageUri = imageUri
+            images = images
         )
     }
 }

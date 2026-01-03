@@ -17,8 +17,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ross.mindnotes.domain.model.Category
+import com.ross.mindnotes.presentation.util.color
+import com.ross.mindnotes.presentation.util.displayName
 
 @Composable
 fun CategorySelector(
@@ -36,11 +39,11 @@ fun CategorySelector(
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
                     .background(
-                        if (isSelected) MaterialTheme.colorScheme.primary else Color.Transparent
+                        if (isSelected) category.color else Color.Transparent
                     )
                     .border(
                         width = 1.dp,
-                        color = if (isSelected) Color.Transparent else MaterialTheme.colorScheme.onSurface,
+                        color = if (isSelected) Color.Transparent else category.color,
                         shape = RoundedCornerShape(16.dp)
                     )
                     .clickable {
@@ -50,9 +53,9 @@ fun CategorySelector(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = category.name.lowercase().replaceFirstChar { it.uppercase() },
-                    color = if (isSelected) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurface,
-                    style = MaterialTheme.typography.bodyMedium
+                    text = category.displayName,
+                    color = if (isSelected) Color.Black else category.color,
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
                 )
             }
         }

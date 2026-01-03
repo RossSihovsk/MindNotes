@@ -10,5 +10,9 @@ sealed class AddEditNoteEvent {
     data class ChangeContentFocus(val focusState: FocusState) : AddEditNoteEvent()
     data class ChangeMood(val mood: Int) : AddEditNoteEvent()
     data class SelectCategory(val category: Category) : AddEditNoteEvent()
+    data class ChangeDate(val timestamp: Long) : AddEditNoteEvent()
+    data class AddImages(val images: List<String>) : AddEditNoteEvent()
+    data class RemoveImage(val imageUri: String) : AddEditNoteEvent()
     object SaveNote : AddEditNoteEvent()
+    object DeleteNote : AddEditNoteEvent()
 }

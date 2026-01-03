@@ -12,5 +12,5 @@ data class NoteEntity(
     val timestamp: Long,
     val category: Category,
     val mood: Int,
-    val imageUri: String?
+    val images: List<String> = emptyList()
 )

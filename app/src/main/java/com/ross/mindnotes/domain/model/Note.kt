@@ -7,5 +7,5 @@ data class Note(
     val timestamp: Long,
     val category: Category,
     val mood: Int, // 1-5 scale
-    val imageUri: String? = null
+    val images: List<String> = emptyList()
 )

@@ -26,7 +26,7 @@ fun MoodSelector(
     val moods = listOf(
         1 to Color(0xFFEF9A9A), // Red
         2 to Color(0xFFFFCC80), // Orange
-        3 to Color(0xFFFFF59D), // Yellow
+        3 to Color(0xFFE0E0E0), // Light Grey
         4 to Color(0xFFA5D6A7), // Light Green
         5 to Color(0xFF80CBC4)  // Green
     )

@@ -8,7 +8,7 @@ import com.ross.mindnotes.domain.model.Category
 
 @Database(
     entities = [NoteEntity::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(Converters::class)
 abstract class MindNotesDatabase : RoomDatabase() {
@@ -28,5 +28,16 @@ class Converters {
     @TypeConverter
     fun toCategory(name: String): Category {
         return Category.valueOf(name)
+    }
+
+    @TypeConverter
+    fun fromStringList(value: List<String>?): String {
+        return value?.joinToString(separator = "|||") ?: ""
+    }
+
+    @TypeConverter
+    fun toStringList(value: String): List<String> {
+        if (value.isEmpty()) return emptyList()
+        return value.split("|||")
     }
 }

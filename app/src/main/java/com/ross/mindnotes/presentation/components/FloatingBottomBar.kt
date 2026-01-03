@@ -10,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -52,6 +53,12 @@ fun FloatingBottomBar(
                 icon = Icons.Default.DateRange,
                 isSelected = currentRoute == Screen.CalendarScreen.route,
                 onClick = { onNavigate(Screen.CalendarScreen.route) }
+            )
+            BottomBarItem(
+                label = "Themes",
+                icon = Icons.Default.List,
+                isSelected = currentRoute == Screen.ThemesScreen.route,
+                onClick = { onNavigate(Screen.ThemesScreen.route) }
             )
         }
     }

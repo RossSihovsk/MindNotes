@@ -11,6 +11,10 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 
+import androidx.compose.material3.MaterialTheme
+
+import androidx.compose.ui.graphics.SolidColor
+
 @Composable
 fun TransparentHintTextField(
     text: String,
@@ -29,7 +33,8 @@ fun TransparentHintTextField(
             value = text,
             onValueChange = onValueChange,
             singleLine = singleLine,
-            textStyle = textStyle,
+            textStyle = textStyle.copy(color = MaterialTheme.colorScheme.onSurface),
+            cursorBrush = SolidColor(MaterialTheme.colorScheme.onSurface),
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged {
@@ -37,7 +42,7 @@ fun TransparentHintTextField(
                 }
         )
         if (isHintVisible) {
-            Text(text = hint, style = textStyle, color = Color.DarkGray)
+            Text(text = hint, style = textStyle, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f))
         }
     }
 }

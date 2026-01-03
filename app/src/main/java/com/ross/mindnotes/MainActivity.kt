@@ -46,7 +46,8 @@ class MainActivity : ComponentActivity() {
                     val currentRoute = navBackStackEntry?.destination?.route
 
                     val showBottomBar = currentRoute == Screen.NotesScreen.route || 
-                                      currentRoute == Screen.CalendarScreen.route
+                                      currentRoute == Screen.CalendarScreen.route ||
+                                      currentRoute == Screen.ThemesScreen.route
 
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
@@ -87,19 +88,13 @@ class MainActivity : ComponentActivity() {
                                 NotesScreen(navController = navController)
                             }
                             composable(
-                                route = Screen.AddEditNoteScreen.route + "?noteId={noteId}&noteColor={noteColor}",
+                                route = Screen.AddEditNoteScreen.route + "?noteId={noteId}",
                                 arguments = listOf(
                                     navArgument(
                                         name = "noteId"
                                     ) {
                                         type = NavType.LongType
                                         defaultValue = -1L
-                                    },
-                                    navArgument(
-                                        name = "noteColor"
-                                    ) {
-                                        type = NavType.IntType
-                                        defaultValue = -1
                                     }
                                 ),
                                 enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)) },
@@ -107,10 +102,8 @@ class MainActivity : ComponentActivity() {
                                 popEnterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)) },
                                 popExitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)) }
                             ) {
-                                val color = it.arguments?.getInt("noteColor") ?: -1
                                 AddEditNoteScreen(
-                                    navController = navController,
-                                    noteColor = color
+                                    navController = navController
                                 )
                             }
                             composable(
@@ -121,6 +114,15 @@ class MainActivity : ComponentActivity() {
                                 popExitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)) }
                             ) {
                                 CalendarScreen(navController = navController)
+                            }
+                            composable(
+                                route = Screen.ThemesScreen.route,
+                                enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)) },
+                                exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Left, animationSpec = tween(700)) },
+                                popEnterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)) },
+                                popExitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.Right, animationSpec = tween(700)) }
+                            ) {
+                                com.ross.mindnotes.presentation.themes_screen.ThemesScreen(navController = navController)
                             }
                         }
                     }

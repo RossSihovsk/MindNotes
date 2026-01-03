@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ross.mindnotes.domain.model.Note
+import com.ross.mindnotes.presentation.util.color
 
 @Composable
 fun NoteItem(
@@ -50,14 +51,7 @@ fun NoteItem(
             }
 
             clipPath(clipPath) {
-                val moodColor = when (note.mood) {
-                    1 -> Color(0xFFEF9A9A) // Red
-                    2 -> Color(0xFFFFCC80) // Orange
-                    3 -> Color(0xFFFFF59D) // Yellow
-                    4 -> Color(0xFFA5D6A7) // Light Green
-                    5 -> Color(0xFF80CBC4) // Green
-                    else -> Color(0xFFE0E0E0) // Gray
-                }
+                val moodColor = note.category.color
                 drawRoundRect(
                     color = moodColor,
                     size = size,

@@ -26,7 +26,8 @@ object AppModule {
             app,
             MindNotesDatabase::class.java,
             MindNotesDatabase.DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration()
+         .build()
     }
 
     @Provides
