@@ -58,7 +58,7 @@ fun NoteItem(
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
                 drawRoundRect(
-                    color = Color(0xFF202020), // Darker shade for cut corner
+                    color = Color.Black.copy(alpha = 0.1f), // Subtle dark shade for cut corner
                     topLeft = Offset(size.width - cutCornerSize.toPx(), -100f),
                     size = Size(cutCornerSize.toPx() + 100f, cutCornerSize.toPx() + 100f),
                     cornerRadius = CornerRadius(cornerRadius.toPx())
@@ -74,7 +74,7 @@ fun NoteItem(
             Text(
                 text = note.title,
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onSurface,
+                color = Color(0xFF202020),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -82,7 +82,7 @@ fun NoteItem(
             Text(
                 text = note.content,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                color = Color(0xFF202020).copy(alpha = 0.8f),
                 maxLines = 10,
                 overflow = TextOverflow.Ellipsis
             )
@@ -94,7 +94,7 @@ fun NoteItem(
             Icon(
                 imageVector = Icons.Default.Delete,
                 contentDescription = "Delete note",
-                tint = MaterialTheme.colorScheme.onSurface
+                tint = Color(0xFF202020)
             )
         }
     }

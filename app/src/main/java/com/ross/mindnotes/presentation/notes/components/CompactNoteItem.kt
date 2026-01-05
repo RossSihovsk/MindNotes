@@ -26,10 +26,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.ross.mindnotes.domain.model.Note
+import com.ross.mindnotes.presentation.util.color
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import com.ross.mindnotes.presentation.util.color
 
 @Composable
 fun CompactNoteItem(
@@ -40,10 +40,11 @@ fun CompactNoteItem(
     val date = remember(note.timestamp) { Date(note.timestamp) }
     val dateFormat = remember { SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault()) }
 
+
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(24.dp))
-            .background(MaterialTheme.colorScheme.surface)
+            .background(note.category.color.copy(alpha = 0.4f))
             .clickable(onClick = onClick)
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically

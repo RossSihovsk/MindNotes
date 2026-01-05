@@ -71,9 +71,9 @@ import coil.compose.rememberAsyncImagePainter
 import com.ross.mindnotes.domain.model.Category
 import com.ross.mindnotes.presentation.add_edit_note.components.CategorySelector
 import com.ross.mindnotes.presentation.add_edit_note.components.TransparentHintTextField
-import com.ross.mindnotes.presentation.util.color
 import com.ross.mindnotes.presentation.util.description
 import com.ross.mindnotes.presentation.util.displayName
+import com.ross.mindnotes.presentation.util.color
 import kotlinx.coroutines.flow.collectLatest
 import java.text.SimpleDateFormat
 import java.util.Date

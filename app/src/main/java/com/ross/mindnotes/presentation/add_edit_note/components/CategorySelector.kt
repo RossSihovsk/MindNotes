@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -35,26 +36,39 @@ fun CategorySelector(
     ) {
         items(Category.values()) { category ->
             val isSelected = category == selectedCategory
+            val categoryColor = category.color
+            
             Box(
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
-                    .background(
-                        if (isSelected) category.color else Color.Transparent
+                    .then(
+                        if (isSelected) {
+                            Modifier.background(
+                                brush = Brush.linearGradient(
+                                    colors = listOf(
+                                        categoryColor,
+                                        categoryColor.copy(alpha = 0.7f)
+                                    )
+                                )
+                            )
+                        } else {
+                            Modifier.background(Color.Transparent)
+                        }
                     )
                     .border(
                         width = 1.dp,
-                        color = if (isSelected) Color.Transparent else category.color,
+                        color = if (isSelected) Color.Transparent else categoryColor.copy(alpha = 0.3f),
                         shape = RoundedCornerShape(16.dp)
                     )
                     .clickable {
                         onCategorySelected(category)
                     }
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = category.displayName,
-                    color = if (isSelected) Color.Black else category.color,
+                    color = if (isSelected) Color.White else categoryColor,
                     style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
                 )
             }

@@ -99,15 +99,27 @@ fun CalendarScreen(
                 val isSelected = date == state.selectedDate
                 
                 // Calculate average mood color if notes exist
+                val isDark = androidx.compose.foundation.isSystemInDarkTheme()
                 val moodColor = if (notesForDay.isNotEmpty()) {
                     val avgMood = notesForDay.map { it.mood }.average().toInt()
-                     when (avgMood) {
-                        1 -> Color(0xFFEF9A9A)
-                        2 -> Color(0xFFFFCC80)
-                        3 -> Color(0xFFFFF59D)
-                        4 -> Color(0xFFA5D6A7)
-                        5 -> Color(0xFF80CBC4)
-                        else -> MaterialTheme.colorScheme.surfaceVariant
+                    if (isDark) {
+                        when (avgMood) {
+                            1 -> Color(0xFFEF9A9A) // Light Red
+                            2 -> Color(0xFFFFCC80) // Light Orange
+                            3 -> Color(0xFF81D4FA) // Light Blue (instead of yellow)
+                            4 -> Color(0xFFA5D6A7) // Light Green
+                            5 -> Color(0xFF80CBC4) // Light Teal
+                            else -> MaterialTheme.colorScheme.surfaceVariant
+                        }
+                    } else {
+                        when (avgMood) {
+                            1 -> Color(0xFFD32F2F) // Red
+                            2 -> Color(0xFFF57C00) // Orange
+                            3 -> Color(0xFFFBC02D) // Yellow
+                            4 -> Color(0xFF388E3C) // Green
+                            5 -> Color(0xFF00796B) // Teal
+                            else -> MaterialTheme.colorScheme.surfaceVariant
+                        }
                     }
                 } else {
                     MaterialTheme.colorScheme.surface
@@ -124,7 +136,13 @@ fun CalendarScreen(
                 ) {
                     Text(
                         text = (day + 1).toString(),
-                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface
+                        color = if (isSelected) {
+                            MaterialTheme.colorScheme.onPrimaryContainer
+                        } else if (notesForDay.isNotEmpty()) {
+                            Color(0xFF202020)
+                        } else {
+                            MaterialTheme.colorScheme.onSurface
+                        }
                     )
                 }
             }

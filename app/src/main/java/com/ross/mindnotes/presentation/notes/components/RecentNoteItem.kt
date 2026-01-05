@@ -47,7 +47,7 @@ fun RecentNoteItem(
     Box(
         modifier = modifier
             .clip(RoundedCornerShape(24.dp))
-            .background(note.category.color.copy(alpha = 0.2f)) // Tinted background
+            .background(note.category.color.copy(alpha = 0.4f)) // Tinted background
             .clickable(onClick = onClick)
             .padding(16.dp)
     ) {
