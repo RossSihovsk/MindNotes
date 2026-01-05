@@ -49,7 +49,7 @@ fun RecentNoteItem(
             .clip(RoundedCornerShape(24.dp))
             .background(note.category.color.copy(alpha = 0.4f)) // Tinted background
             .clickable(onClick = onClick)
-            .padding(16.dp)
+            .padding(12.dp)
     ) {
         Column {
             Row(
@@ -85,7 +85,7 @@ fun RecentNoteItem(
             if (note.images.isNotEmpty()) {
                 val images = note.images
                 val imageCount = images.size
-                val collageHeight = 250.dp
+                val collageHeight = 200.dp
                 val cornerRadius = 16.dp
 
                 when (imageCount) {
@@ -174,8 +174,7 @@ fun RecentNoteItem(
                 // Formatting for text preview or "No Image" state
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(150.dp)
+                        .height(120.dp)
                         .clip(RoundedCornerShape(16.dp))
                         .background(MaterialTheme.colorScheme.background)
                         .padding(16.dp)

@@ -35,7 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.ross.mindnotes.presentation.notes.components.NoteItem
+import com.ross.mindnotes.presentation.notes.components.CompactNoteItem
 import com.ross.mindnotes.presentation.util.Screen
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -159,14 +159,12 @@ fun CalendarScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(selectedNotes) { note ->
-                NoteItem(
+                CompactNoteItem(
                     note = note,
-                    onDeleteClick = { /* Handle delete if needed, or navigate to details */ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                             navController.navigate(Screen.AddEditNoteScreen.route + "?noteId=${note.id}")
-                        }
+                    onClick = {
+                        navController.navigate(Screen.AddEditNoteScreen.route + "?noteId=${note.id}")
+                    },
+                    modifier = Modifier.fillMaxWidth()
                 )
             }
             if (selectedNotes.isEmpty()) {
