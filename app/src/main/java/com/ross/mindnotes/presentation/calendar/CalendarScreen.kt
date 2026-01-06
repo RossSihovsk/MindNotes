@@ -27,6 +27,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,6 +39,7 @@ import androidx.navigation.NavController
 import com.ross.mindnotes.presentation.notes.components.CompactNoteItem
 import com.ross.mindnotes.presentation.util.Screen
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -149,7 +151,13 @@ fun CalendarScreen(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Notes for ${state.selectedDate}", style = MaterialTheme.typography.titleMedium)
+        val dateFormatter = remember { DateTimeFormatter.ofPattern("MMM d yyyy", Locale.getDefault()) }
+        Text(
+            text = "Notes for ${state.selectedDate.format(dateFormatter)}",
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
         Spacer(modifier = Modifier.height(8.dp))
 
         // Notes List for Selected Date
