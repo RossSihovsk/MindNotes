@@ -21,13 +21,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Precision
+import coil.size.Size
 import com.ross.mindnotes.domain.model.Note
 import com.ross.mindnotes.presentation.util.color
 import java.text.SimpleDateFormat
@@ -91,7 +95,16 @@ fun RecentNoteItem(
                 when (imageCount) {
                     1 -> {
                         Image(
-                            painter = rememberAsyncImagePainter(images[0]),
+                            painter = rememberAsyncImagePainter(
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(images[0])
+                                    .crossfade(true)
+                                    .precision(Precision.EXACT)
+                                    .size(Size.ORIGINAL)
+                                    .allowHardware(false)
+                                    .build(),
+                                filterQuality = FilterQuality.High
+                            ),
                             contentDescription = null,
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -108,7 +121,16 @@ fun RecentNoteItem(
                                 .clip(RoundedCornerShape(cornerRadius))
                         ) {
                             Image(
-                                painter = rememberAsyncImagePainter(images[0]),
+                                painter = rememberAsyncImagePainter(
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(images[0])
+                                        .crossfade(true)
+                                        .precision(Precision.EXACT)
+                                        .size(1200)
+                                        .allowHardware(false)
+                                        .build(),
+                                    filterQuality = FilterQuality.High
+                                ),
                                 contentDescription = null,
                                 modifier = Modifier
                                     .weight(1f)
@@ -117,7 +139,16 @@ fun RecentNoteItem(
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Image(
-                                painter = rememberAsyncImagePainter(images[1]),
+                                painter = rememberAsyncImagePainter(
+                                    model = ImageRequest.Builder(LocalContext.current)
+                                        .data(images[1])
+                                        .crossfade(true)
+                                        .precision(Precision.EXACT)
+                                        .size(1200)
+                                        .allowHardware(false)
+                                        .build(),
+                                    filterQuality = FilterQuality.High
+                                ),
                                 contentDescription = null,
                                 modifier = Modifier
                                     .weight(1f)
@@ -135,7 +166,16 @@ fun RecentNoteItem(
                         ) {
                             // First image takes left half
                             Image(
-                                painter = rememberAsyncImagePainter(images[0]),
+                                painter = rememberAsyncImagePainter(
+                                model = ImageRequest.Builder(LocalContext.current)
+                                    .data(images[0])
+                                    .crossfade(true)
+                                    .precision(Precision.EXACT)
+                                    .size(1200)
+                                    .allowHardware(false)
+                                    .build(),
+                                filterQuality = FilterQuality.High
+                            ),
                                 contentDescription = null,
                                 modifier = Modifier
                                     .weight(1f)
@@ -150,7 +190,16 @@ fun RecentNoteItem(
                                     .fillMaxSize()
                             ) {
                                 Image(
-                                    painter = rememberAsyncImagePainter(images[1]),
+                                    painter = rememberAsyncImagePainter(
+                                        model = ImageRequest.Builder(LocalContext.current)
+                                            .data(images[1])
+                                            .crossfade(true)
+                                            .precision(Precision.EXACT)
+                                            .size(1000)
+                                            .allowHardware(false)
+                                            .build(),
+                                        filterQuality = FilterQuality.High
+                                    ),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .weight(1f)
@@ -159,7 +208,16 @@ fun RecentNoteItem(
                                 )
                                 Spacer(modifier = Modifier.height(4.dp))
                                 Image(
-                                    painter = rememberAsyncImagePainter(images[2]), // Use 3rd image
+                                    painter = rememberAsyncImagePainter(
+                                        model = ImageRequest.Builder(LocalContext.current)
+                                            .data(images[2])
+                                            .crossfade(true)
+                                            .precision(Precision.EXACT)
+                                            .size(1000)
+                                            .allowHardware(false)
+                                            .build(),
+                                        filterQuality = FilterQuality.High
+                                    ),
                                     contentDescription = null,
                                     modifier = Modifier
                                         .weight(1f)

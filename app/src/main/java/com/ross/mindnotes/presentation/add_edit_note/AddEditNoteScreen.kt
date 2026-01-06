@@ -59,6 +59,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -70,6 +71,9 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Precision
+import coil.size.Size
 import com.ross.mindnotes.domain.model.Category
 import com.ross.mindnotes.presentation.add_edit_note.components.CategorySelector
 import com.ross.mindnotes.presentation.add_edit_note.components.TransparentHintTextField
@@ -166,7 +170,16 @@ fun AddEditNoteScreen(
                  contentAlignment = Alignment.Center
             ) {
                  Image(
-                     painter = rememberAsyncImagePainter(uri),
+                     painter = rememberAsyncImagePainter(
+                         model = ImageRequest.Builder(LocalContext.current)
+                             .data(uri)
+                             .size(Size.ORIGINAL)
+                             .precision(Precision.EXACT)
+                             .allowHardware(false)
+                             .crossfade(true)
+                             .build(),
+                         filterQuality = FilterQuality.High
+                     ),
                      contentDescription = "Full screen image",
                      modifier = Modifier.fillMaxSize(),
                      contentScale = ContentScale.Fit
@@ -467,15 +480,18 @@ fun CollageImageItem(
 ) {
     Image(
         painter = rememberAsyncImagePainter(
-            model = androidx.compose.ui.platform.LocalContext.current.run {
-                coil.request.ImageRequest.Builder(this)
-                    .data(uri)
-                    .crossfade(true)
-                    .build()
-            }
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(uri)
+                .crossfade(true)
+                .precision(Precision.EXACT)
+                .size(1000)
+                .allowHardware(false)
+                .build(),
+            filterQuality = FilterQuality.High
         ),
         contentDescription = "Note Image",
         modifier = modifier
+            .clip(RoundedCornerShape(16.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
             .combinedClickable(
                 onClick = onClick,

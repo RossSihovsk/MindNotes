@@ -23,10 +23,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.FilterQuality
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.size.Precision
 import com.ross.mindnotes.domain.model.Note
 import com.ross.mindnotes.presentation.util.color
 import java.text.SimpleDateFormat
@@ -54,7 +58,16 @@ fun CompactNoteItem(
         // Thumbnail or Placeholder
         if (note.images.isNotEmpty()) {
             Image(
-                painter = rememberAsyncImagePainter(note.images[0]),
+                painter = rememberAsyncImagePainter(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(note.images[0])
+                        .crossfade(true)
+                        .precision(Precision.EXACT)
+                        .size(600)
+                        .allowHardware(false)
+                        .build(),
+                    filterQuality = FilterQuality.High
+                ),
                 contentDescription = null,
                 modifier = Modifier
                     .size(60.dp)
