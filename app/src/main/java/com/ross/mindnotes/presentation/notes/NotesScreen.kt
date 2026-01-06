@@ -19,7 +19,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.LargeFloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -79,17 +79,18 @@ fun NotesScreen(
             }
         },
         floatingActionButton = {
-            LargeFloatingActionButton(
+            FloatingActionButton(
                 onClick = {
                     navController.navigate(Screen.AddEditNoteScreen.route)
                 },
                 containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
+                contentColor = MaterialTheme.colorScheme.onPrimary,
+                modifier = Modifier.padding(bottom = 64.dp) // Slightly lower but still above bar
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit, 
                     contentDescription = "Add note",
-                    modifier = Modifier.size(36.dp)
+                    modifier = Modifier.size(24.dp)
                 )
             }
         },

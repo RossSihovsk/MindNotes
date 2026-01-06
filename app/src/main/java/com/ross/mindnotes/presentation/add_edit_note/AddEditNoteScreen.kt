@@ -17,8 +17,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyRow
@@ -213,6 +216,21 @@ fun AddEditNoteScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+                   // Topic Selector (Now in Top Bar)
+                   Box(
+                       modifier = Modifier
+                           .clip(RoundedCornerShape(20.dp))
+                           .background(MaterialTheme.colorScheme.surfaceVariant)
+                           .clickable { showCategorySelector = !showCategorySelector }
+                           .padding(horizontal = 16.dp, vertical = 8.dp)
+                   ) {
+                       Text(
+                           text = "Topic",
+                           style = MaterialTheme.typography.labelLarge,
+                           color = MaterialTheme.colorScheme.onSurfaceVariant
+                       )
+                   }
+                   Spacer(modifier = Modifier.width(8.dp))
                    IconButton(onClick = {
                         imagePickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                    }) {
@@ -236,39 +254,14 @@ fun AddEditNoteScreen(
                 }
             }
         },
-        bottomBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                // Topic Selector
-                Box(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(20.dp))
-                        .background(MaterialTheme.colorScheme.surfaceVariant)
-                        .clickable { showCategorySelector = !showCategorySelector }
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                ) {
-                    Text(
-                        text = "Topic",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-                Spacer(modifier = Modifier.weight(1f))
-            }
-            if (showCategorySelector) {
-                 // Inline selector logic (handled below for now in Body if visible, or here if Overlay)
-            }
-        }
     ) { padding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
                 .padding(horizontal = 16.dp)
+                .navigationBarsPadding()
+                .imePadding()
                 .verticalScroll(rememberScrollState())
         ) {
             // Image Gallery (Collage Chunks Horizontal)

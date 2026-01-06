@@ -66,7 +66,7 @@ fun CompactNoteItem(
                         .size(600)
                         .allowHardware(false)
                         .build(),
-                    filterQuality = FilterQuality.High
+                    filterQuality = FilterQuality.Medium
                 ),
                 contentDescription = null,
                 modifier = Modifier

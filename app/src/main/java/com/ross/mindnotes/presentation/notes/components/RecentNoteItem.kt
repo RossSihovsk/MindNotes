@@ -103,7 +103,7 @@ fun RecentNoteItem(
                                     .size(Size.ORIGINAL)
                                     .allowHardware(false)
                                     .build(),
-                                filterQuality = FilterQuality.High
+                                filterQuality = FilterQuality.Medium
                             ),
                             contentDescription = null,
                             modifier = Modifier
@@ -129,7 +129,7 @@ fun RecentNoteItem(
                                         .size(1200)
                                         .allowHardware(false)
                                         .build(),
-                                    filterQuality = FilterQuality.High
+                                    filterQuality = FilterQuality.Medium
                                 ),
                                 contentDescription = null,
                                 modifier = Modifier
@@ -147,7 +147,7 @@ fun RecentNoteItem(
                                         .size(1200)
                                         .allowHardware(false)
                                         .build(),
-                                    filterQuality = FilterQuality.High
+                                    filterQuality = FilterQuality.Medium
                                 ),
                                 contentDescription = null,
                                 modifier = Modifier
@@ -174,7 +174,7 @@ fun RecentNoteItem(
                                     .size(1200)
                                     .allowHardware(false)
                                     .build(),
-                                filterQuality = FilterQuality.High
+                                filterQuality = FilterQuality.Medium
                             ),
                                 contentDescription = null,
                                 modifier = Modifier
@@ -198,7 +198,7 @@ fun RecentNoteItem(
                                             .size(1000)
                                             .allowHardware(false)
                                             .build(),
-                                        filterQuality = FilterQuality.High
+                                        filterQuality = FilterQuality.Medium
                                     ),
                                     contentDescription = null,
                                     modifier = Modifier
@@ -216,7 +216,7 @@ fun RecentNoteItem(
                                             .size(1000)
                                             .allowHardware(false)
                                             .build(),
-                                        filterQuality = FilterQuality.High
+                                        filterQuality = FilterQuality.Medium
                                     ),
                                     contentDescription = null,
                                     modifier = Modifier
