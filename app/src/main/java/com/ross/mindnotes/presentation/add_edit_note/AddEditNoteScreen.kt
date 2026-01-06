@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -69,6 +70,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -84,6 +87,7 @@ import com.ross.mindnotes.presentation.util.description
 import com.ross.mindnotes.presentation.util.displayName
 import com.ross.mindnotes.presentation.util.color
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -120,6 +124,11 @@ fun AddEditNoteScreen(
     
     // Full Screen Image Viewer State
     var selectedImageUri by remember { mutableStateOf<String?>(null) }
+    
+    val scrollState = rememberScrollState()
+    val scope = androidx.compose.runtime.rememberCoroutineScope()
+    val focusManager = LocalFocusManager.current
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     LaunchedEffect(key1 = true) {
         viewModel.eventFlow.collectLatest { event: AddEditNoteViewModel.UiEvent ->
@@ -221,7 +230,14 @@ fun AddEditNoteScreen(
                        modifier = Modifier
                            .clip(RoundedCornerShape(20.dp))
                            .background(MaterialTheme.colorScheme.surfaceVariant)
-                           .clickable { showCategorySelector = !showCategorySelector }
+                           .clickable { 
+                               focusManager.clearFocus()
+                               keyboardController?.hide()
+                               showCategorySelector = !showCategorySelector 
+                               if (showCategorySelector) {
+                                   scope.launch { scrollState.animateScrollTo(0) }
+                               }
+                           }
                            .padding(horizontal = 16.dp, vertical = 8.dp)
                    ) {
                        Text(
@@ -231,10 +247,23 @@ fun AddEditNoteScreen(
                        )
                    }
                    Spacer(modifier = Modifier.width(8.dp))
-                   IconButton(onClick = {
-                        imagePickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                   }) {
-                       Icon(imageVector = Icons.Default.Add, contentDescription = "Add Image")
+                   Box(
+                       modifier = Modifier
+                           .clip(RoundedCornerShape(20.dp))
+                           .background(MaterialTheme.colorScheme.surfaceVariant)
+                           .clickable { 
+                               focusManager.clearFocus()
+                               keyboardController?.hide()
+                               imagePickerLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                               scope.launch { scrollState.animateScrollTo(0) }
+                           }
+                           .padding(horizontal = 16.dp, vertical = 8.dp)
+                   ) {
+                       Text(
+                           text = "Photos",
+                           style = MaterialTheme.typography.labelLarge,
+                           color = MaterialTheme.colorScheme.onSurfaceVariant
+                       )
                    }
                    Spacer(modifier = Modifier.width(8.dp))
                    Button(
@@ -262,7 +291,7 @@ fun AddEditNoteScreen(
                 .padding(horizontal = 16.dp)
                 .navigationBarsPadding()
                 .imePadding()
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(scrollState)
         ) {
             // Image Gallery (Collage Chunks Horizontal)
             if (noteImages.isNotEmpty()) {
